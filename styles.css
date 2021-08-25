@@ -34,7 +34,7 @@ main img {
     height: 300px;
 }
 
-.breaked {
+main img[src="./public/images/quebrada.jpg"] {
     cursor: default;
 }
 
