@@ -2,12 +2,12 @@
 const lamp = document.getElementById('lamp');
 let blink;
 
-document.getElementById('on').addEventListener('click', () => lampActions.turnOn());
-document.getElementById('off').addEventListener('click', () => lampActions.turnOff());
-document.getElementById('blink').addEventListener('click', () => lampActions.turnBlink());
-lamp.addEventListener('dblclick', () => lampActions.break());
-lamp.addEventListener('mouseenter', () => !lamp.src.includes("quebrada") && lampActions.turnOn());
-lamp.addEventListener('mouseleave', () => !lamp.src.includes("quebrada") && lampActions.turnOff());
+newListener('on', 'click', () => lampActions.turnOn());
+newListener('off', 'click', () => lampActions.turnOff());
+newListener('blink', 'click', () => lampActions.turnBlink());
+newListener('lamp', 'dblclick', () => lampActions.break());
+newListener('lamp', 'mouseenter', () => !lamp.src.includes("quebrada") && lampActions.turnOn());
+newListener('lamp', 'mouseleave', () => !lamp.src.includes("quebrada") && lampActions.turnOff());
 
 const lampActions = {
     lamp: document.getElementById('lamp'),
@@ -20,14 +20,15 @@ const lampActions = {
         disableButtons(false, true, false);
     },
     turnBlink: () => {
-        if(document.getElementById('blink').textContent == "Piscar") {
-            document.getElementById('blink').textContent = "Parar";
+        const blinkButton = document.getElementById('blink')
+        if(blinkButton.textContent == "Piscar") {
+            blinkButton.textContent = "Parar";
             blink = setInterval(() => {
-                document.getElementById('blink').textContent == "Piscar" && clearInterval(blink);
+                blinkButton.textContent == "Piscar" && clearInterval(blink);
                 this.lamp.src.includes("desligada") ? lampActions.turnOn() : lampActions.turnOff();
             }, 200);
             blink;
-        } else document.getElementById('blink').textContent = "Piscar";
+        } else blinkButton.textContent = "Piscar";
     },
     break: () => {
         this.lamp.src = "./public/images/quebrada.jpg";
@@ -41,4 +42,8 @@ function disableButtons(onState, offState, blinkState) {
     document.getElementById('on').disabled = onState;
     document.getElementById('off').disabled = offState;
     document.getElementById('blink').disabled = blinkState;
+}
+
+function newListener(elementId, eventName, voidFunction) {
+    document.getElementById(elementId).addEventListener(eventName, voidFunction);
 }
