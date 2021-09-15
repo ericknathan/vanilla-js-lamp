@@ -42,6 +42,9 @@ button {
     height: 48px;
     width: 100px;
     cursor: pointer;
+    border: none;
+    border: 1px solid black;
+    border-radius: 4px;
 }
 
 button[disabled] {
@@ -50,4 +53,14 @@ button[disabled] {
 
 footer {
     font-style: italic;
+}
+
+.red {
+    background-color: red;
+    color: white;
+}
+
+.green {
+    background-color: darkgreen;
+    color: white;
 }

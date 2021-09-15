@@ -22,13 +22,17 @@ const lampActions = {
     turnBlink: () => {
         const blinkButton = document.getElementById('blink')
         if(blinkButton.textContent == "Piscar") {
+            blinkButton.className = "red";
             blinkButton.textContent = "Parar";
             blink = setInterval(() => {
                 blinkButton.textContent == "Piscar" && clearInterval(blink);
                 this.lamp.src.includes("desligada") ? lampActions.turnOn() : lampActions.turnOff();
             }, 200);
             blink;
-        } else blinkButton.textContent = "Piscar";
+        } else {
+            blinkButton.textContent = "Piscar";
+            blinkButton.className = "green";
+        };
     },
     break: () => {
         this.lamp.src = "./public/images/quebrada.jpg";
